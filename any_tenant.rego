@@ -14,7 +14,7 @@ _associated_tenants[tenant_key] := tenant {
 	user_assignments := data.role_assignments[sprintf("user:%s", [input.user.key])]
 	some assigned_object, _ in user_assignments
 	startswith(assigned_object, "__tenant:")
-	tenant_key := trim_left(assigned_object, "__tenant:")
+	tenant_key := trim_prefix(assigned_object, "__tenant:")
 	tenant := data.tenants[tenant_key]
 }
 
